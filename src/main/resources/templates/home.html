@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title data-th-text="${title}">Home</title>
+        <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div
+            class="bg-gray-200 w-1/2 p-4 flex flex-col justify-center items-center"
+        >
+            <h1 data-th-text="${heading}" class="text-3xl text-red-500">
+                Welcome to Home page!
+            </h1>
+
+            <p data-th-text="${desc}"></p>
+        </div>
+
+        <!-- flowbit content -->
+
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    </body>
+</html>
