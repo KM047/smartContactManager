@@ -1,0 +1,22 @@
+<div
+    class="flex justify-center items-center gap-2 p-4 text-sm"
+    role="alert"
+    data-th-if="${session.msg}"
+    data-th-Object="${session.msg}"
+    data-th-fragment="messageBox"
+    data-th-classappend="*{'text-'+ messageType + '-500 rounded-lg bg-'+ messageType + '-50 dark:bg-gray-800 dark:text-'+ messageType +'-400'}"
+>
+    <div
+        class="border border-*{messageType}-400 px-1 rounded-full"
+        data-th-classappend="*{'border-'+ messageType + '-400'}"
+    >
+        <i class="fa-solid fa-check"></i>
+    </div>
+
+    <!-- <span class="sr-only">success</span> -->
+    <div>
+        <span data-th-text="*{message}"> </span>
+    </div>
+
+    <th-block th:text="${@sessionHelper.removeMessage()}"></th-block>
+</div>

@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>About</title>
-    </head>
-    <body></body>
+<html lang="en" th:replace="~{base :: parent(~{:: #content}, 'About')}">
+    <head> </head>
+    <body>
+        <section id="content">
+            <h1>Welcome to about page</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptates totam facere ullam eveniet dolorum sint culpa,
+                temporibus sequi perspiciatis fuga quas odit voluptas tempora
+                porro asperiores sit nulla. Esse, assumenda?
+            </p>
+        </section>
+    </body>
 </html>
