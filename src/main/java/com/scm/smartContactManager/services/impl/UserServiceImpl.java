@@ -7,8 +7,10 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.scm.smartContactManager.constants.AppConstants;
 import com.scm.smartContactManager.helper.ResourceNotFoundException;
 import com.scm.smartContactManager.models.UserModel;
 import com.scm.smartContactManager.repositories.UserRepo;
@@ -22,6 +24,8 @@ public class UserServiceImpl implements UserService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
     @Override
     public UserModel saveUser(UserModel user) {
 
@@ -30,7 +34,9 @@ public class UserServiceImpl implements UserService {
         String userId = UUID.randomUUID().toString();
         user.setUserId(userId);
 
-        // TODO: Encode the password while saving
+        user.setPassword(encoder.encode(user.getPassword()));
+
+        user.setRoleList(List.of(AppConstants.ROLE_USER));
 
         return userRepo.save(user);
     }
@@ -80,7 +86,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isUserExistByEmail(String email) {
 
-        UserModel availableUser = userRepo.findByEmail(email).orElse(null);
+        UserModel availableUser = userRepo.findByEmail(email);
         return availableUser != null ? true : false;
 
     }

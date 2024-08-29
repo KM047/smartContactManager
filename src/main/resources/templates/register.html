@@ -32,8 +32,9 @@
                         <form
                             data-th-action="@{'/do-register'}"
                             method="post"
-                            data-th-Object="${userForm}"
+                            data-th-object="${userFormModel}"
                             class="max-w-sm mx-auto"
+                            novalidate
                         >
                             <div class="mb-5">
                                 <label
@@ -96,7 +97,9 @@
                                     required
                                 />
                                 <p
-                                    class="text-gray-400 dark:text-gray-500 px-1 py-2"
+                                    data-th-if="${#fields.hasErrors('password')}"
+                                    data-th-errors="*{password}"
+                                    class="text-red-600 px-1 py-2"
                                 >
                                     Password required at least 6 characters
                                 </p>

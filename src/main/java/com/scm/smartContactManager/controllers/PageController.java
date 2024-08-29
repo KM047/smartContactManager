@@ -56,7 +56,7 @@ public class PageController {
     @RequestMapping("/register")
     public String singUpPage(Model model) {
 
-        model.addAttribute("userForm", new UserFormModel());
+        model.addAttribute("userFormModel", new UserFormModel());
 
         return "register";
     }
@@ -68,11 +68,16 @@ public class PageController {
 
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
     public String processRegister(@Valid @ModelAttribute UserFormModel userForm, BindingResult result,
-            HttpSession session) {
+            HttpSession session, Model model) {
 
-        // if (result.hasErrors()) {
-        // return "register";
-        // }
+        if (result.hasErrors()) {
+
+            System.out.println("Error encounter -> : " + result.getObjectName());
+
+            // model.addAttribute("userFormModel", userForm);
+
+            return "register";
+        }
 
         UserModel user = new UserModel();
 
