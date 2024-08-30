@@ -33,6 +33,9 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private OA2AuthenticationSuccessHandler authenticationSuccessHandler;
+
     // @Autowired
     // private SecurityCustomUserDetailService secCustomUserDetailService;
 
@@ -82,7 +85,9 @@ public class SecurityConfig {
 
                 .csrf(custom -> custom.disable())
                 .logout(logoutForm -> logoutForm.logoutUrl("/user/logout").logoutSuccessUrl("/login?logout=true"))
-
+                .oauth2Login(oauth -> oauth.defaultSuccessUrl("/user/dashboard")
+                        .loginPage("/login")
+                        .successHandler(authenticationSuccessHandler))
                 .build();
 
         // .failureHandler(new AuthenticationFailureHandler() {

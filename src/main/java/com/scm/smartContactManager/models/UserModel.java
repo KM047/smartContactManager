@@ -34,7 +34,7 @@ public class UserModel {
     @Column(unique = true, nullable = false)
     private String email;
     private String password;
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String phoneNumber;
     private String address;
     @Column(length = 1000)
