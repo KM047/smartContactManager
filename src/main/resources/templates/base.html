@@ -29,8 +29,18 @@
 
         <!-- common header -->
         <header>
-            <section data-th-replace="~{fragments/navbar :: navbar}"></section>
+            <div th:if="${loggedInUser}">
+                <section
+                    data-th-replace="~{user/user_navbar :: user-navbar}"
+                ></section>
+            </div>
+            <div th:unless="${loggedInUser}">
+                <section
+                    data-th-replace="~{fragments/navbar :: navbar}"
+                ></section>
+            </div>
         </header>
+
 
         <div class="p-2">
             <section data-th-replace="${content}"></section>

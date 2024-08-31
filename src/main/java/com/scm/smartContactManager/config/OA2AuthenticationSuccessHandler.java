@@ -52,7 +52,8 @@ public class OA2AuthenticationSuccessHandler implements AuthenticationSuccessHan
          * 1. We will put password block empty and we user logged in then give a pop to
          * fill password.
          * 2. We will set a random password and we give a pop to reset the password
-         * 3. If the user logged with the same account with google and github then we also need to check the email is already exist
+         * 3. If the user logged with the same account with google and github then we
+         * also need to check the email is already exist
          * 
          * 
          */

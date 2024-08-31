@@ -48,8 +48,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserModel> updateUser(UserModel user) {
-        UserModel availableUser = userRepo.findById(user.getUserId())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        UserModel availableUser = null;
+
+        if (user.getUserId() != null) {
+
+            availableUser = userRepo.findById(user.getUserId())
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        } else {
+
+            availableUser = userRepo.findByEmail(user.getEmail());
+
+        }
+
+        if (availableUser == null) {
+            throw new ResourceNotFoundException("User not found");
+        }
 
         // update user with available user
 
@@ -94,6 +108,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserModel> getAllUsers() {
         return userRepo.findAll();
+    }
+
+    @Override
+    public UserModel getUserByEmail(String email) {
+
+        UserModel userByEmail = userRepo.findByEmail(email);
+
+        if (userByEmail == null) {
+            return null;
+        }
+
+        return userByEmail;
     }
 
 }

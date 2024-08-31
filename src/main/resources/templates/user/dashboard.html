@@ -6,8 +6,16 @@
     </head>
     <body>
         <div id="content">
-            <h1>This is dashboard</h1>
-            <a data-th-href="@{'/user/logout'}">Logout</a>
+            <!-- Sidebar -->
+            <div th:if="${loggedInUser}">
+                <section
+                    data-th-replace="~{user/sidebar :: user-sidebar}"
+                ></section>
+            </div>
+            <div class="p-4 mt-36 sm:mt-28 sm:ml-64 min-h-full">
+                <h1>This is dashboard</h1>
+                <a data-th-href="@{'/user/logout'}">Logout</a>
+            </div>
         </div>
     </body>
 </html>
