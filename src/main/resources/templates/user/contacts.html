@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{:: #content}, 'Contact Page')}">
+<html
+    lang="en"
+    th:replace="~{base :: parent(~{::#content},~{::script}, 'Contact Page')}"
+>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -181,10 +184,6 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             <div>
-                                                <!-- <a data-th-href="@{'/user/contacts/delete/'+*{id}}">
-                                      <i class="fa-solid w-6 h-6 fa-trash"></i>
-                                    </a> -->
-
                                                 <!-- delete contact -->
                                                 <button
                                                     th:onclick="deleteContact([[${c.id}]])"
@@ -202,9 +201,9 @@
                                                     ></i
                                                 ></a>
 
-                                                <!-- viewcontact -->
+                                                <!-- view contact -->
                                                 <button
-                                                    th:onclick="loadContactdata([[${c.id}]])"
+                                                    th:onclick="loadContactData([[${c.id}]])"
                                                 >
                                                     <i
                                                         class="fa-solid fa-eye"
@@ -265,14 +264,18 @@
                             </div>
                             <h1
                                 class="text-5xl text-center dark:bg-gray-800 dark:text-white bg-white p-4"
-                                data-th-if="${pageContact.totalElements<=0}"
+                                data-th-if="${pageContact.totalElements <= 0}"
                             >
                                 No result found
                             </h1>
                         </div>
                     </div>
+                    <div
+                        data-th-replace="~{user/contact_modal :: contact}"
+                    ></div>
                 </div>
             </div>
         </div>
+        <script data-th-src="@{'/js/contacts.js'}"></script>
     </body>
 </html>

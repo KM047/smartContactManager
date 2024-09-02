@@ -13,6 +13,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -38,6 +40,7 @@ public class Contact {
     private String cloudinaryImagePublicId;
 
     @ManyToOne
+    @JsonIgnore
     private UserModel user;
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)

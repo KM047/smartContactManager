@@ -27,17 +27,13 @@
                                     data-th-replace="~{/fragments/message::messageBox}"
                                 ></div>
 
-                                <h1 class="text-2xl font-semibold text-center">
-                                    Add New Contact
+                                <h1 class="text-2xl font-semibold">
+                                    Update Contact
                                 </h1>
-                                <p class="text-gray-500 text-center">
-                                    This contact will be stored on cloud, you
-                                    can direct email this client from scm...
-                                </p>
 
                                 <form
                                     class="mt-8"
-                                    data-th-action="@{'/user/contacts/add'}"
+                                    data-th-action="@{'/user/contacts/update/' + ${contactId}}"
                                     data-th-object="${contactForm}"
                                     method="post"
                                     enctype="multipart/form-data"
@@ -226,8 +222,8 @@
                                         </p>
 
                                         <img
+                                            data-th-src="*{picture}"
                                             class="max-h-52 mx-auto rounded-lg shadow m-3"
-                                            src=""
                                             id="upload_image_preview"
                                             alt=""
                                         />
@@ -256,7 +252,7 @@
                                             type="submit"
                                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                         >
-                                            Add Contact
+                                            Update Contact
                                         </button>
                                         <button
                                             type="reset"

@@ -13,11 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-import com.nimbusds.oauth2.sdk.assertions.saml2.SAML2AssertionDetails;
 import com.scm.smartContactManager.constants.AppConstants;
 import com.scm.smartContactManager.constants.MessageType;
 import com.scm.smartContactManager.forms.ContactForm;
@@ -34,8 +34,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/user/contacts")
@@ -186,6 +184,90 @@ public class ContactController {
         model.addAttribute("pageSize", AppConstants.PAGE_SIZE);
 
         return "/user/contacts";
+    }
+
+    @RequestMapping("/delete/{contactId}")
+    public String deleteContact(@PathVariable String contactId, HttpSession session) {
+
+        contactService.deleteContact(contactId);
+
+        session.setAttribute("msg",
+                Message.builder()
+                        .message("Contact is Deleted successfully !! ")
+                        .messageType(MessageType.green)
+                        .build());
+
+        return "redirect:/user/contacts";
+
+    }
+
+    @GetMapping("/view/{contactId}")
+    public String updateContactFormView(
+            @PathVariable("contactId") String contactId,
+            Model model) {
+
+        var contact = contactService.getContactById(contactId);
+        ContactForm contactForm = new ContactForm();
+        contactForm.setName(contact.getName());
+        contactForm.setEmail(contact.getEmail());
+        contactForm.setPhoneNumber(contact.getPhoneNumber());
+        contactForm.setAddress(contact.getAddress());
+        contactForm.setDescription(contact.getDescription());
+        contactForm.setFavorite(contact.isFavorite());
+        contactForm.setWebsiteLink(contact.getWebsiteLink());
+        contactForm.setPicture(contact.getContactImage());
+
+        ;
+        model.addAttribute("contactForm", contactForm);
+        model.addAttribute("contactId", contactId);
+
+        return "user/update_contact";
+    }
+
+    @RequestMapping(value = "/update/{contactId}", method = RequestMethod.POST)
+    public String updateContactFormPage(@PathVariable String contactId, @Valid @ModelAttribute ContactForm contactForm,
+            BindingResult bindingResult, HttpSession session) {
+
+        if (bindingResult.hasErrors()) {
+            return "user/update_contact";
+        }
+
+        logger.info("Contact updated processing : ");
+
+        var contact = contactService.getContactById(contactId);
+
+        contact.setId(contactId);
+        contact.setName(contactForm.getName());
+        contact.setEmail(contactForm.getEmail());
+        contact.setPhoneNumber(contactForm.getPhoneNumber());
+        contact.setAddress(contactForm.getAddress());
+        contact.setDescription(contactForm.getDescription());
+        contact.setFavorite(contactForm.isFavorite());
+        contact.setWebsiteLink(contactForm.getWebsiteLink());
+
+        if (contactForm.getContactImage() != null && !contactForm.getContactImage().isEmpty()) {
+            logger.info("file is not empty");
+            String fileName = UUID.randomUUID().toString();
+            String imageUrl = imageService.uploadImage(contactForm.getContactImage(), fileName);
+            contact.setCloudinaryImagePublicId(fileName);
+            contact.setContactImage(imageUrl);
+            contactForm.setPicture(imageUrl);
+
+        } else {
+            logger.info("file is empty");
+        }
+
+        var updatedContact = contactService.updateContact(contact);
+
+        logger.info("Contact updated successfully : " + updatedContact);
+
+        session.setAttribute("msg",
+                Message.builder()
+                        .message("Contact updated successfully")
+                        .messageType(MessageType.green)
+                        .build());
+        return "redirect:/user/contacts/view/" + contactId;
+
     }
 
 }

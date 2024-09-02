@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{:: #content}, 'Profile')}">
+<html
+    lang="en"
+    th:replace="~{base :: parent(~{::#content},~{::script}, 'Profile')}"
+>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,5 +20,6 @@
                 <a data-th-href="@{'/user/logout'}">Logout</a>
             </div>
         </div>
+        <script></script>
     </body>
 </html>

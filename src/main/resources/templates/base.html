@@ -3,7 +3,7 @@
 <html
     class=""
     lang="en"
-    th:fragment="parent(content, title )"
+    th:fragment="parent(content,script, title )"
     xmlns:th="http://www.thymeleaf.org"
 >
     <head>
@@ -13,7 +13,7 @@
         <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
         <link rel="stylesheet" data-th-href="@{'/css/style.css'}" />
         <link
-            href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
             rel="stylesheet"
         />
         <link
@@ -41,12 +41,13 @@
             </div>
         </header>
 
-
         <div class="p-2">
             <section data-th-replace="${content}"></section>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script data-th-src="@{'/js/script.js'}"></script>
+        <th:block data-th-replace="${script}"></th:block>
     </body>
 </html>

@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -45,9 +44,9 @@ public class ContactServiceImpl implements ContactService {
         availableContact.setContactImage(contact.getContactImage());
         availableContact.setFavorite(contact.isFavorite());
         availableContact.setWebsiteLink(contact.getWebsiteLink());
-        // availableContact.setCloudinaryImagePublicId(contact.getCloudinaryImagePublicId());
+        availableContact.setCloudinaryImagePublicId(contact.getCloudinaryImagePublicId());
 
-        return availableContact;
+        return contactRepo.save(availableContact);
     }
 
     @Override
