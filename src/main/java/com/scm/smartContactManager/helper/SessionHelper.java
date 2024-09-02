@@ -12,7 +12,7 @@ public class SessionHelper {
     public static void removeMessage() {
         try {
 
-            System.out.println("Removing message from the session");
+            // System.out.println("Removing message from the session");
             HttpSession session = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                     .getRequest()
                     .getSession();

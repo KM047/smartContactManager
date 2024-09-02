@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class OA2AuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private Logger logger = LoggerFactory.getLogger(OA2AuthenticationSuccessHandler.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UserRepo repo;

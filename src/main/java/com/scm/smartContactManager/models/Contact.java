@@ -27,13 +27,15 @@ public class Contact {
     private String address;
 
     @Column(length = 1000)
-    private String avatar;
+    private String contactImage;
 
     @Column(length = 1000)
     private String description;
-    private boolean isFavorite = false;
+    private boolean favorite = false;
     private String category;
     private String websiteLink;
+
+    private String cloudinaryImagePublicId;
 
     @ManyToOne
     private UserModel user;
