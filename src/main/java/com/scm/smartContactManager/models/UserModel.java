@@ -47,8 +47,9 @@ public class UserModel {
     @Column(length = 1000)
     private String avatar;
     private String gender;
-    private boolean isActive = false;
+    private boolean active = false;
     private boolean emailVerified = false;
+    private String emailVerifyToken;
     private boolean phoneVerified = false;
 
     // Add more fields as needed for user registration and login details

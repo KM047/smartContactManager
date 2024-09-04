@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
 
-    private com.scm.smartContactManager.models.UserModel userModel;
+    private UserModel userModel;
 
     public UserPrincipal(UserModel userModel) {
         this.userModel = userModel;
@@ -34,6 +34,11 @@ public class UserPrincipal implements UserDetails {
     @Override
     public String getUsername() {
         return userModel.getEmail();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return userModel.isActive();
     }
 
 }

@@ -23,4 +23,6 @@ public interface UserService {
 
     UserModel getUserByEmail(String email);
 
+    UserModel verifyEmailByToken(String emailToken);
+
 }

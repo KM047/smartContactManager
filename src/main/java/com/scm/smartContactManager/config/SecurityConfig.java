@@ -30,91 +30,96 @@ import jakarta.servlet.http.HttpServletResponse;
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+        @Autowired
+        private UserDetailsService userDetailsService;
 
-    @Autowired
-    private OA2AuthenticationSuccessHandler authenticationSuccessHandler;
+        @Autowired
+        private OA2AuthenticationSuccessHandler authenticationSuccessHandler;
 
-    // @Autowired
-    // private SecurityCustomUserDetailService secCustomUserDetailService;
+        @Autowired
+        private AuthFailureHandler authenticationFailureHandler;
 
-    // @Bean
-    // public UserDetailsService userDetailsService() {
-    // UserDetails user1 = User
-    // .withDefaultPasswordEncoder()
-    // .username("root")
-    // .password("root")
-    // .roles("ADMIN", "USER")
-    // .build();
+        // @Autowired
+        // private SecurityCustomUserDetailService secCustomUserDetailService;
 
-    // UserDetails user2 = User.withUsername("root123")
-    // .password("root123")
-    // .roles("ADMIN")
-    // .build();
-    // return new InMemoryUserDetailsManager(user1, user2);
-    // }
+        // @Bean
+        // public UserDetailsService userDetailsService() {
+        // UserDetails user1 = User
+        // .withDefaultPasswordEncoder()
+        // .username("root")
+        // .password("root")
+        // .roles("ADMIN", "USER")
+        // .build();
 
-    @Bean
-    public AuthenticationProvider getAuthenticationProvider() {
-
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-
-        provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
-
-        provider.setUserDetailsService(userDetailsService);
-
-        return provider;
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        return http
-                .authorizeHttpRequests(
-                        request -> request.requestMatchers("/user/**").authenticated()
-                                .anyRequest()
-                                .permitAll())
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
-                        .loginProcessingUrl("/authenticate")
-                        .defaultSuccessUrl("/user/dashboard")
-                        .failureForwardUrl("/login?error=true")
-                        .usernameParameter("email")
-                        .passwordParameter("password"))
-
-                .csrf(custom -> custom.disable())
-                .logout(logoutForm -> logoutForm.logoutUrl("/user/logout").logoutSuccessUrl("/login?logout=true"))
-                .oauth2Login(oauth -> oauth.defaultSuccessUrl("/user/dashboard")
-                        .loginPage("/login")
-                        .successHandler(authenticationSuccessHandler))
-                .build();
-
-        // .failureHandler(new AuthenticationFailureHandler() {
-
-        // @Override
-        // public void onAuthenticationFailure(HttpServletRequest request,
-        // HttpServletResponse response, AuthenticationException exception)
-        // throws IOException, ServletException {
-        // // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException(
-        // "Unimplemented method 'onAuthenticationFailure'");
+        // UserDetails user2 = User.withUsername("root123")
+        // .password("root123")
+        // .roles("ADMIN")
+        // .build();
+        // return new InMemoryUserDetailsManager(user1, user2);
         // }
 
-        // })
-        // .successHandler(new AuthenticationSuccessHandler() {
+        @Bean
+        public AuthenticationProvider getAuthenticationProvider() {
 
-        // @Override
-        // public void onAuthenticationSuccess(HttpServletRequest request,
-        // HttpServletResponse response, Authentication authentication)
-        // throws IOException, ServletException {
-        // // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException(
-        // "Unimplemented method 'onAuthenticationSuccess'");
-        // }
+                DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
-        // })
+                provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
 
-    }
+                provider.setUserDetailsService(userDetailsService);
+
+                return provider;
+        }
+
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+                return http
+                                .authorizeHttpRequests(
+                                                request -> request.requestMatchers("/user/**").authenticated()
+                                                                .anyRequest()
+                                                                .permitAll())
+                                .formLogin(formLogin -> formLogin
+                                                .loginPage("/login")
+                                                .loginProcessingUrl("/authenticate")
+                                                .defaultSuccessUrl("/user/dashboard")
+                                                .failureForwardUrl("/login?error=true")
+                                                .usernameParameter("email")
+                                                .passwordParameter("password")
+                                                .failureHandler(authenticationFailureHandler))
+
+                                .csrf(custom -> custom.disable())
+                                .logout(logoutForm -> logoutForm.logoutUrl("/user/logout")
+                                                .logoutSuccessUrl("/login?logout=true"))
+                                .oauth2Login(oauth -> oauth.defaultSuccessUrl("/user/dashboard")
+                                                .loginPage("/login")
+                                                .successHandler(authenticationSuccessHandler))
+                                .build();
+
+                // .failureHandler(new AuthenticationFailureHandler() {
+
+                // @Override
+                // public void onAuthenticationFailure(HttpServletRequest request,
+                // HttpServletResponse response, AuthenticationException exception)
+                // throws IOException, ServletException {
+                // // TODO Auto-generated method stub
+                // throw new UnsupportedOperationException(
+                // "Unimplemented method 'onAuthenticationFailure'");
+                // }
+
+                // })
+                // .successHandler(new AuthenticationSuccessHandler() {
+
+                // @Override
+                // public void onAuthenticationSuccess(HttpServletRequest request,
+                // HttpServletResponse response, Authentication authentication)
+                // throws IOException, ServletException {
+                // // TODO Auto-generated method stub
+                // throw new UnsupportedOperationException(
+                // "Unimplemented method 'onAuthenticationSuccess'");
+                // }
+
+                // })
+
+        }
 
 }
