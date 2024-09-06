@@ -116,14 +116,30 @@
                                         <th scope="col" class="px-6 py-3">
                                             Name
                                         </th>
+
                                         <th scope="col" class="px-6 py-3">
                                             Phone
                                         </th>
+
                                         <th scope="col" class="px-6 py-3">
                                             Links
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             Action
+                                        </th>
+                                        <!-- ---------------------------------------- -->
+                                        <th scope="col" class="hidden">
+                                            Email
+                                        </th>
+                                        <th scope="col" class="hidden">
+                                            Address
+                                        </th>
+
+                                        <th scope="col" class="hidden">
+                                            Contact Image
+                                        </th>
+                                        <th scope="col" class="hidden">
+                                            Description
                                         </th>
                                     </tr>
                                 </thead>
@@ -166,6 +182,36 @@
                                                 data-th-text="*{phoneNumber}"
                                             ></span>
                                         </td>
+
+                                        <!-- Email -->
+                                        <td class="px-6 py-4 hidden">
+                                            <span
+                                                data-th-text="*{email}"
+                                            ></span>
+                                        </td>
+                                        <!-- Address -->
+                                        <td class="px-6 py-4 hidden">
+                                            <span
+                                                data-th-text="*{address}"
+                                            ></span>
+                                        </td>
+
+                                        <!-- Avatar -->
+                                        <td class="px-6 py-4 hidden">
+                                            <span
+                                                data-th-text="*{contactImage}"
+                                            ></span>
+                                        </td>
+                                        <!-- Active -->
+                                        <td
+                                            class="px-6 py-4 hidden"
+                                            data-a-wrap
+                                        >
+                                            <span
+                                                data-th-text="*{description}"
+                                            ></span>
+                                        </td>
+
                                         <td class="px-6 py-4">
                                             <div class="flex items-center">
                                                 <div
@@ -182,7 +228,10 @@
                                                 ></a>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td
+                                            class="px-6 py-4"
+                                            data-exclude="true"
+                                        >
                                             <div>
                                                 <!-- delete contact -->
                                                 <button
