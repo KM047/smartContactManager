@@ -19,8 +19,6 @@ public class AuthController {
     @GetMapping("/verify-email")
     public String verificationOfEmail(@RequestParam("t") String emailToken) {
 
-        System.out.println("Verifying email :" + emailToken);
-
         UserModel user = userService.verifyEmailByToken(emailToken);
 
         if (user != null) {

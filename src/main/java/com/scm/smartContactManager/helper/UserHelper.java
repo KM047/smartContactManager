@@ -5,6 +5,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.scm.smartContactManager.models.UserModel;
+import com.scm.smartContactManager.constants.AppConstants;
 
 public class UserHelper {
 
@@ -22,14 +23,11 @@ public class UserHelper {
 
                 // when logged in with google account
 
-                System.out.println("Logged in with google account");
-
                 return oAuth2User.getAttribute("email").toString();
 
             } else if (clientId.equalsIgnoreCase("github")) {
 
                 // when logged in with github account
-                System.out.println("Logged in with github account");
 
                 return oAuth2User.getAttribute("email") != null ? oAuth2User.getAttribute("email")
                         : oAuth2User.getAttribute("login").toString() + "@gmail.com";
@@ -48,7 +46,7 @@ public class UserHelper {
 
     public static String getLinkForEmailVerification(String emailToken, UserModel user) {
 
-        String verifyLink = "http://localhost:8080/auth/verify-email?t=" + emailToken;
+        String verifyLink = AppConstants.baseURL + "/auth/verify-email?t=" + emailToken;
 
         String greeting = "Dear " + user.getName() + ",";
         String instructions = "Please click the following link to verify your email address: ";

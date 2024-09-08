@@ -107,8 +107,6 @@ public class ContactController {
 
         contactService.saveContact(contact);
 
-        System.out.println(contactForm);
-
         session.setAttribute("msg",
                 Message.builder()
                         .message("You have successfully added a new contact")

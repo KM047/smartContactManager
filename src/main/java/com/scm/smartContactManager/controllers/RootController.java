@@ -34,7 +34,6 @@ public class RootController {
         if (loggedInUserEmail == null) {
             model.addAttribute("loggedInUser", null);
         } else {
-            System.out.println("User logged int : " + loggedInUserEmail);
 
             UserModel user = userService.getUserByEmail(loggedInUserEmail);
 

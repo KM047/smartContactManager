@@ -1,3 +1,4 @@
+// const baseURL = "https://smartcontactmanager-ev1x.onrender.com";
 const baseURL = "http://localhost:8080";
 
 const viewContactModal = document.getElementById("view_contact_modal");
@@ -76,5 +77,14 @@ async function deleteContact(id) {
             const url = `${baseURL}/user/contacts/delete/${id}`;
             window.location.replace(url);
         }
+    });
+}
+
+function exportData() {
+    TableToExcel.convert(document.getElementById("contact-table"), {
+        name: "contacts.xlsx",
+        sheet: {
+            name: "Sheet 1",
+        },
     });
 }

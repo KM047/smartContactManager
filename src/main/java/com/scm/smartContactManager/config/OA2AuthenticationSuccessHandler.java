@@ -58,11 +58,8 @@ public class OA2AuthenticationSuccessHandler implements AuthenticationSuccessHan
          * 
          */
 
-        logger.info(user.getName());
         user.getAttributes().forEach((key, value) -> logger.info("{}: {}", key,
                 value));
-
-        // logger.info(user.getAuthorities().toString());
 
         var oauth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
 
@@ -95,31 +92,6 @@ public class OA2AuthenticationSuccessHandler implements AuthenticationSuccessHan
             newUser.setProviderId(user.getAttribute(user.getName()));
 
         }
-
-        logger.info(user.getAuthorities().toString());
-
-        logger.info(oauth2AuthenticationToken.getAuthorizedClientRegistrationId());
-
-        // String email = user.getAttribute("email");
-        // String name = user.getAttribute("name");
-        // String avatar = user.getAttribute("picture").toString();
-
-        // System.out.println("Email: " + email + " Name: " + name + " Avatar: " +
-        // avatar);
-
-        // UserModel newUser = new UserModel();
-
-        // newUser.setName(name);
-        // newUser.setEmail(email);
-        // newUser.setAvatar(avatar);
-        // newUser.setPassword("password");
-
-        // newUser.setProvider(authorizedClientRegistrationId == "google" ?
-        // AuthProvider.GOOGLE : AuthProvider.GitHub);
-        // newUser.setProviderId(user.getName());
-
-        // newUser.setAbout("");
-        // newUser.setAddress("");
 
         UserModel availableUser = repo.findByEmail(newUser.getEmail());
 

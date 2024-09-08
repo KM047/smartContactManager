@@ -72,10 +72,6 @@ public class PageController {
 
         if (result.hasErrors()) {
 
-            System.out.println("Error encounter -> : " + result.getObjectName());
-
-            // model.addAttribute("userFormModel", userForm);
-
             return "register";
         }
 
@@ -91,8 +87,6 @@ public class PageController {
         user.setAvatar(env.getProperty("default.avatar"));
 
         UserModel savedUser = userService.saveUser(user);
-
-        System.out.println("User is saved : " + savedUser);
 
         Message message = Message.builder().message("User registered Successfully.")
                 .messageType(MessageType.green).build();

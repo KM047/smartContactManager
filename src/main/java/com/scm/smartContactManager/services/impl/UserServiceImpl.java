@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
         try {
             userRepo.deleteById(userId);
         } catch (Exception e) {
-            System.out.println("User not found or deleted already");
+            e.printStackTrace();
         }
     }
 

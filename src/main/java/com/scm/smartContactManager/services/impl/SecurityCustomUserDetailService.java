@@ -24,7 +24,7 @@ public class SecurityCustomUserDetailService implements UserDetailsService {
         UserModel availableUser = repo.findByEmail(email);
 
         if (availableUser == null) {
-            System.out.println("User Not Found");
+
             throw new UsernameNotFoundException("User not found with email " + email);
 
         }
