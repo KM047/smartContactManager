@@ -1,13 +1,16 @@
 package com.scm.smartContactManager.helper;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.scm.smartContactManager.models.UserModel;
-import com.scm.smartContactManager.constants.AppConstants;
 
 public class UserHelper {
+
+    @Value("${base_Url}")
+    private static String baseUrl;
 
     public static String getEmailOfLoggedInUser(Authentication authentication) {
 
@@ -46,7 +49,7 @@ public class UserHelper {
 
     public static String getLinkForEmailVerification(String emailToken, UserModel user) {
 
-        String verifyLink = AppConstants.baseURL + "/auth/verify-email?t=" + emailToken;
+        String verifyLink = baseUrl + "/auth/verify-email?t=" + emailToken;
 
         String greeting = "Dear " + user.getName() + ",";
         String instructions = "Please click the following link to verify your email address: ";
