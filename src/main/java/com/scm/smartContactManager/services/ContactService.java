@@ -6,7 +6,6 @@ import com.scm.smartContactManager.models.UserModel;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 public interface ContactService {
 
