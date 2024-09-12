@@ -10,6 +10,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title data-th-text="${title}">Base</title>
+
         <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
         <link rel="stylesheet" data-th-href="@{'/css/style.css'}" />
         <link
@@ -22,6 +23,12 @@
             integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
+        />
+
+        <link
+            rel="shortcut icon"
+            data-th-href="@{'/images/phone.png'}"
+            type="image/x-icon"
         />
     </head>
     <body class="dark:bg-gray-900 dark:text-white">
@@ -41,7 +48,7 @@
             </div>
         </header>
 
-        <div class="p-2">
+        <div class="p-2 h-full">
             <section data-th-replace="${content}"></section>
         </div>
 
