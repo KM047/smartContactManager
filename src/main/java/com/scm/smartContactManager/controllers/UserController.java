@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.scm.smartContactManager.services.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/user")
@@ -29,6 +30,11 @@ public class UserController {
     public String userProfile(Model model, Authentication authentication) {
 
         return "user/profile";
+    }
+
+    @GetMapping("/send-email")
+    public String sendEmail(Model model, Authentication authentication) {
+        return "user/send_email";
     }
 
 }
