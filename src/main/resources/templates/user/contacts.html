@@ -121,12 +121,6 @@
                                             Phone
                                         </th>
 
-                                        <th scope="col" class="px-6 py-3">
-                                            Links
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Action
-                                        </th>
                                         <!-- ---------------------------------------- -->
                                         <th scope="col" class="hidden">
                                             Email
@@ -140,6 +134,21 @@
                                         </th>
                                         <th scope="col" class="hidden">
                                             Description
+                                        </th>
+                                        <!-- ---------------------------------------- -->
+                                        <th
+                                            scope="col"
+                                            class="px-6 py-3"
+                                            data-exclude="true"
+                                        >
+                                            Links
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-6 py-3"
+                                            data-exclude="true"
+                                        >
+                                            Action
                                         </th>
                                     </tr>
                                 </thead>
@@ -163,15 +172,11 @@
                                                 <div
                                                     class="text-base font-semibold"
                                                     data-th-text="*{name}"
-                                                >
-                                                    Neil Sims
-                                                </div>
+                                                ></div>
                                                 <div
                                                     class="font-normal text-gray-500"
                                                     data-th-text="*{email}"
-                                                >
-                                                    neil.sims@flowbite.com
-                                                </div>
+                                                ></div>
                                             </div>
                                         </th>
                                         <td class="px-6 py-4">
@@ -212,7 +217,11 @@
                                             ></span>
                                         </td>
 
-                                        <td class="px-6 py-4">
+                                        <!-- Links -->
+                                        <td
+                                            class="px-6 py-4"
+                                            data-exclude="true"
+                                        >
                                             <div class="flex items-center">
                                                 <div
                                                     data-th-if="*{favorite}"
@@ -228,6 +237,8 @@
                                                 ></a>
                                             </div>
                                         </td>
+
+                                        <!-- Action -->
                                         <td
                                             class="px-6 py-4"
                                             data-exclude="true"

@@ -1,8 +1,6 @@
 package com.scm.smartContactManager.config;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +12,6 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.scm.smartContactManager.constants.AppConstants;
 import com.scm.smartContactManager.constants.AuthProvider;
 import com.scm.smartContactManager.models.UserModel;
 import com.scm.smartContactManager.repositories.UserRepo;
