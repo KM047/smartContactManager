@@ -20,6 +20,9 @@ import lombok.Setter;
 
 import java.util.*;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
 @Entity(name = "users")
 @Table(name = "users")
 @Getter
@@ -30,6 +33,7 @@ import java.util.*;
 public class UserModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String userId;
     @Column(name = "user_name", nullable = false)
     private String name;
@@ -52,7 +56,6 @@ public class UserModel {
 
     // Add more fields as needed for user registration and login details
     // e.g. -> Google, GitHub, Facebook, etc...
-
     @Enumerated(value = EnumType.STRING)
     private AuthProvider provider = AuthProvider.SELF;
     private String providerId;

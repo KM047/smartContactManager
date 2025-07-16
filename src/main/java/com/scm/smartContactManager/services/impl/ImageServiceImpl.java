@@ -3,6 +3,7 @@ package com.scm.smartContactManager.services.impl;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,15 +16,15 @@ import com.scm.smartContactManager.services.ImageService;
 @Service
 public class ImageServiceImpl implements ImageService {
 
+    @Autowired
     private Cloudinary cloudinary;
 
-    public ImageServiceImpl(Cloudinary cloudinary) {
-        this.cloudinary = cloudinary;
-    }
-
+    // public ImageServiceImpl(Cloudinary cloudinary) {
+    //     this.cloudinary = cloudinary;
+    // }
     @Override
     public String uploadImage(MultipartFile contactImage, String fileName) {
-        
+
         try {
             byte[] data = new byte[contactImage.getInputStream().available()];
 

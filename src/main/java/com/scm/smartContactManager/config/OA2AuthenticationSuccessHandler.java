@@ -44,17 +44,15 @@ public class OA2AuthenticationSuccessHandler implements AuthenticationSuccessHan
         // TODO: Their might be some error will occure when user try to login
         // So, I'm assuming that user's email is already verified.
         // - then we need to change the default password
-
         /**
-         * 1. We will put password block empty and we user logged in then give a pop to
-         * fill password.
-         * 2. We will set a random password and we give a pop to reset the password
-         * 3. If the user logged with the same account with google and github then we
-         * also need to check the email is already exist
-         * 
-         * 
+         * 1. We will put password block empty and we user logged in then give a
+         * pop to fill password. 2. We will set a random password and we give a
+         * pop to reset the password 3. If the user logged with the same account
+         * with google and github then we also need to check the email is
+         * already exist
+         *
+         *
          */
-
         user.getAttributes().forEach((key, value) -> logger.info("{}: {}", key,
                 value));
 
@@ -81,7 +79,7 @@ public class OA2AuthenticationSuccessHandler implements AuthenticationSuccessHan
 
             newUser.setEmail(
                     user.getAttribute("email") != null ? user.getAttribute("email")
-                            : user.getAttribute("login").toString() + "@gmail.com");
+                    : user.getAttribute("login").toString() + "@gmail.com");
 
             newUser.setAvatar(user.getAttribute("avatar_url").toString());
             newUser.setName(user.getAttribute("login").toString());
